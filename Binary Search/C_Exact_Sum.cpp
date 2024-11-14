@@ -1,62 +1,42 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
 int main()
 {
-    ios::sync_with_stdio(0);
+    ios::sync_with_stdio(0);   
     cin.tie(0);
 
-    int t;
-    cin >> t;
-
-    while (t--)
+    int n;
+    while(cin>>n)
     {
-        long long int n;
-        cin >> n;
-        long long int a[n];
+        vector<int>a(n);
+        for(int &x:a) cin>>x;
 
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
+        int t; cin>>t;
+        sort(a.begin(),a.end());
+        int l=0,r=n-1;
+        int b=0,c=0;
 
-        sort(a, a + n);
+        while(l<r)
+        {
+            int s=a[l]+a[r];
 
-        if (n == 1)
-        {
-            cout << "YES" << endl;
-        }
-        else if (n == 2)
-        {
-            if (a[0] == a[1] || a[0] == 0 || a[1] == 0)
+            if(s==t)
             {
-                cout << "YES" << endl;
+                b=a[l];
+                c=a[r];
+                l++; r--;
+            }
+            else if(s<t)
+            {
+                l++;
             }
             else
             {
-                cout << "NO" << endl;
+                r--;
             }
         }
-        else
-        {
-            int c = 0;
-            for (int i = 0; i < n - 1; i++)
-            {
-                if (a[i] != 0 && a[i] != a[i + 1])
-                {
-                    c = 1;
-                    break;
-                }
-            }
-            if (c == 1)
-            {
-                cout << "NO" << endl;
-            }
-            else
-            {
-                cout << "YES" << endl;
-            }
-        }
+
+        cout<<"Peter should buy books whose prices are "<<b<<" and "<<c<<"."<<endl<<endl;
     }
 
     return 0;
